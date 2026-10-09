@@ -1,0 +1,565 @@
+    body { margin:0; font-family:Arial, sans-serif; scroll-behavior:smooth; }
+    header { display:flex; justify-content:space-between; align-items:center; padding:5px 20px; background:#003366; color:white; position:sticky; top:0; z-index:1000; }
+    nav ul { list-style:none; display:flex; gap:20px; }
+    nav ul li a { color:white; text-decoration:none; font-weight:bold; }
+    nav a:hover {color:#ffcc00;}
+    .menu-toggle { display:none; font-size:24px; cursor:pointer; }
+    @media(max-width:768px){ nav ul{display:none;flex-direction:column; background:#003366; position:absolute; top:60px; right:20px; padding:10px; border-radius:5px;} nav ul.show{display:flex;} .menu-toggle{display:block;} }
+
+    .hero { 
+    /* Initial fallback image */
+    background: url('images/Mino.jpeg') no-repeat center/cover; 
+    color: white; 
+    height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    position: relative; 
+    
+    /* Animation: 10s total (5 images * 2s each), repeats forever */
+    animation: slideImages 30s infinite;
+}
+
+/* Your existing overlay and z-index logic remains the same */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    pointer-events: none;
+}
+
+.hero h1, .hero p, .hero a { position: relative; z-index: 1; }
+
+/* The Sliding Logic */
+@keyframes slideImages {
+    0%, 20% { background: url('images/Mino.jpeg') no-repeat center/cover; }
+    21%, 40% { background: url('images/work.jpeg') no-repeat center/cover; }
+    41%, 60% { background: url('images/civiflux .jpeg') no-repeat center/cover; }
+    61%, 80% { background: url('images/hero img.jpeg') no-repeat center/cover; }
+    81%, 100% { background: url('images/About Us.jpeg') no-repeat center/cover; }
+}
+
+/* Your existing text animations */
+.hero h1 { font-size: 3em; animation: fadeInDown 2s; }
+.hero p { font-size: 1.2em; margin: 20px 0; animation: fadeInUp 2s; }
+.hero a { 
+    background: #ffcc00; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    color: #003366; 
+    text-decoration: none; 
+    font-weight: bold; 
+    animation: zoomIn 2s; 
+}
+
+    section{padding:60px 20px;}
+    h2{text-align:center; margin-bottom:40px;}
+    .grid{display:grid; gap:20px;}
+    .services,.projects,.testimonials{grid-template-columns:repeat(auto-fit,minmax(250px,1fr));}
+    .card{background:white; border-radius:10px; overflow:hidden; box-shadow:0 4px 6px rgba(0,0,0,0.1); transition:transform .3s;} 
+    .card:hover{transform:translateY(-10px);} 
+    .card img{width:100%; height:250px; object-fit:cover;} 
+    .card-content{padding:20px;} 
+
+    .testimonial{padding:20px; background:#f4f4f4; border-radius:10px; box-shadow:0 2px 4px rgba(0,0,0,0.1); animation:fadeIn 2s;} 
+
+    .contact-wrapper{display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start;} 
+    @media(max-width:768px){.contact-wrapper{grid-template-columns:1fr;}}
+    @media (max-width: 768px) {form button {width: 80%;text-align: center;}}
+
+    form{display:flex; flex-direction:column; gap:15px;} 
+    input,textarea{padding:10px; border-radius:5px; border:1px solid #ccc; width:100%;} 
+    button{background:#003366; color:white; border:none; padding:10px; border-radius:5px; cursor:pointer; transition:background .3s;} 
+    button:hover{background:#0055aa;} 
+
+    footer{background:#001f3f; color:white; padding:40px 20px; text-align:center;} 
+    .footer-logo img{margin-bottom:20px;}
+    .socials{display:flex; justify-content:center; gap:20px; margin:20px 0;} 
+    .socials a{color:white; font-size:24px; transition:transform .3s, color .3s;} 
+    .socials a:hover{color:#ffcc00; transform:scale(1.2);} 
+
+    @keyframes fadeIn{from{opacity:0;}to{opacity:1;}} 
+    @keyframes fadeInDown{from{opacity:0;transform:translateY(-50px);}to{opacity:1;transform:translateY(0);}} 
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(50px);}to{opacity:1;transform:translateY(0);}} 
+    @keyframes zoomIn{from{opacity:0;transform:scale(0.5);}to{opacity:1;transform:scale(1);}} 
+
+
+  /* ✅ Fix hero image scaling for mobile */
+  @media(max-width:768px){
+    .hero {
+      height: 60vh; /* smaller hero section on phones */
+      background-position: center top;
+    }
+    .hero h1 {
+      font-size: 1.8em;
+    }
+    .hero p {
+      font-size: 1em;
+    }
+    .clients-track img {
+      width: 120px;
+      margin: 0 20px;
+    }
+    .clients-track {
+      animation-duration: 25s; /* slightly faster on mobile */
+  }
+  }
+
+  /* ✅ Improve animations for mobile */
+  .hero h1, .hero p, .hero a, .card, .testimonial {
+    will-change: transform, opacity;
+  }
+
+
+  /* Our Clients Section */
+#clients {
+  padding: 60px 20px;
+  background: #f8f9fb;
+  text-align: center;
+}
+.clients-slider:active .clients-track {
+  animation-play-state: paused;
+}
+
+#clients h2 {
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Slider container */
+.clients-slider {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+/* Moving track */
+.clients-track {
+  display: flex;
+  width: calc(250px * 20); /* number of images */
+  animation: scroll-left 10s linear infinite;
+}
+
+/* Client logos */
+.clients-track img {
+  width: 180px;
+  height: auto;
+  margin: 0 35px;
+  opacity: 1;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect */
+.clients-track img:hover {
+  transform: scale(1.05);
+}
+.about {
+  padding: 60px 10%;
+  background: #f9f9f9;
+}
+
+.about h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2rem;
+}
+
+.about-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.about-text {
+  flex: 1;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+.about-text p {
+  margin-bottom: 15px;
+}
+
+.about-highlight {
+  background: #e6f0f8;
+  padding: 15px;
+  border-left: 4px solid #004aad;
+}
+
+.about-image {
+  flex: 1;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+
+/* Animation */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+@media (max-width: 768px) {
+  .about-wrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-highlight {
+    text-align: left;
+  }
+  .clients-track {
+    animation-duration: 10s;
+  }
+}
+.projects-cta {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.btn-more-projects {
+  display: inline-block;
+  padding: 12px 30px;
+  background: #003366;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.btn-more-projects:hover {
+  background: #0055aa;
+  transform: translateY(-2px);
+}
+.btn-secondary {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 14px 28px;
+  background: #004aad;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .btn-secondary {
+    width: 70%;
+    text-align: center;
+    padding: 16px;
+    font-size: 16px;
+  }
+}
+
+
+.btn-secondary:hover {
+  background: #002f6c;
+}
+.personnel-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+}
+
+.personnel-table th,
+.personnel-table td {
+  border: 1px solid #000;
+  padding: 10px;
+  vertical-align: top;
+}
+
+.personnel-table th {
+  background: #f4f4f4;
+  text-align: left;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+.container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.container h3 {
+  margin-top: 25px;
+  color: #004aad;
+}
+
+.container ul {
+  padding-left: 20px;
+}
+
+.container ul li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .container h2 {
+    font-size: 22px;
+  }
+
+  .container h3 {
+    font-size: 18px;
+  }
+}
+.table-scale-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.personnel-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.personnel-table th,
+.personnel-table td {
+  border: 1px solid #000;
+  padding: 10px;
+  text-align: left;
+  vertical-align: top;
+}
+@media (max-width: 768px) {
+  .table-scale-wrapper {
+    transform: scale(0.8);
+    transform-origin: top left;
+    width: 125%; /* compensates for scale */
+  }
+}
+
+@media (max-width: 480px) {
+  .table-scale-wrapper {
+    transform: scale(0.7);
+    transform-origin: top left;
+    width: 143%;
+  }
+}
+.about-details {
+    padding: 30px 20px 60px 20px;
+    background-color: #f9f9f9;
+    line-height: 1.6;
+}
+
+.content-block {
+    margin-bottom: 40px;
+    text-align: center;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.features-list li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.features-list i {
+    color: #0056b3; /* Adjust to match your logo color */
+    margin-right: 15px;
+    margin-top: 5px;
+}
+
+.values-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.value-item {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    border-top: 4px solid #0056b3;
+}
+#real-time-clock {
+    background: #ffcc00;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border-left: 3px solid #0056b3; /* Matches the engineering theme */
+    min-width: 85px;
+    text-align: center;
+}
+
+/* Hide clock on very small screens if it crowds the logo */
+@media (max-width: 768px) {
+    #real-time-clock {
+        font-size: 0.5rem;
+        gap: 5px;
+        padding: 2px;
+    }
+}
+/* Mobile Responsiveness for About & Values */
+@media (max-width: 768px) {
+    
+    /* Stack Core Values in a single column */
+    .values-container {
+        grid-template-columns: 1fr; /* Forces one item per row */
+        gap: 15px;
+    }
+
+    /* Adjust the Features List for better mobile reading */
+    .features-list li {
+        flex-direction: column; /* Icon sits above the text */
+        align-items: center;
+        text-align: center;
+        background: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .features-list i {
+        margin-right: 0;
+        margin-bottom: 10px; /* Space between icon and text */
+        font-size: 1.5rem;
+    }
+
+  
+}
+/* Partners Section Styling */
+.partners-section {
+    padding: 20px 20px;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.section-title {
+    margin-bottom: 40px;
+    font-size: 2rem;
+    position: relative;
+}
+
+/* Creating the grid for logos */
+.partner-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 30px;
+    align-items: center;
+    justify-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.partner-logo img {
+    max-width: 100%;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect to bring back color */
+.partner-logo img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+/* Responsive adjustment for mobile */
+@media (max-width: 600px) {
+    .partner-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+.equipment-section {
+    padding: 20px 10px; /* Reduced padding for more space */
+}
+
+.table-responsive {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.equipment-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    table-layout: fixed; /* This forces the table to stay within 100% width */
+}
+
+.equipment-table th, .equipment-table td {
+    border: 1px solid #333;
+    padding: 8px 4px; /* Smaller padding */
+    word-wrap: break-word; /* Ensures long text wraps to a new line */
+    font-size: 0.9rem;
+}
+
+/* Specific Column Widths */
+.equipment-table th:nth-child(1), 
+.equipment-table td:nth-child(1) { width: 10%; } /* Item No */
+
+.equipment-table th:nth-child(2), 
+.equipment-table td:nth-child(2) { width: 50%; } /* Make/Model */
+
+.equipment-table th:nth-child(3), 
+.equipment-table td:nth-child(3) { width: 20%; } /* Qty */
+
+.equipment-table th:nth-child(4), 
+.equipment-table td:nth-child(4) { width: 20%; } /* Image */
+
+/* MOBILE ADJUSTMENTS */
+@media screen and (max-width: 600px) {
+    .equipment-table th, .equipment-table td {
+        font-size: 0.65rem; /* Shrunk text for mobile */
+        padding: 4px 2px;   /* Minimal padding */
+    }
+
+    .equipment-table img {
+        width: 40px !important; /* Smaller images on mobile */
+        height: auto;
+    }
+}
+
+.equipment-table img {
+    border-radius: 2px;
+    display: block;
+    margin: 0 auto;
+    width: 60px;
+    height: auto;
+}
+/* Hover effect */
+.equipment-table tr:hover {
+    background-color: #f1f1f1;
+}
+.equipment-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.equipment-table tr:nth-child(even) {
+    background-color: #fafafa;
+}
